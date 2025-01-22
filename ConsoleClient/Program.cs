@@ -21,7 +21,7 @@ class Program
     await socket.ConnectAsync(uri, invoker, default);
 
     byte[] buffer = new byte[1024 * 4];
-    DateTime killMeOn = DateTime.Now.AddSeconds(15);
+    DateTime killMeOn = DateTime.Now.AddSeconds(30);
     bool killMeNow = false;
     while (killMeNow || DateTime.Now < killMeOn)
     {
@@ -33,6 +33,9 @@ class Program
       Console.WriteLine(payload);
       Console.WriteLine(punchLine);
 
+      Console.WriteLine("Client going to sleep...");
+      Thread.Sleep(2000);
+      
       killMeNow = result.MessageType == WebSocketMessageType.Close;
     }
 

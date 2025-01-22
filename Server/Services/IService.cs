@@ -14,7 +14,7 @@ public class Service : IService
     try
     {
       byte[] buffer = new byte[1024 * 4];
-      DateTime killMeOn = DateTime.Now.AddSeconds(10);
+      DateTime killMeOn = DateTime.Now.AddSeconds(30);
       bool killMeNow = false;
       while (killMeNow || DateTime.Now < killMeOn)
       {
@@ -24,6 +24,7 @@ public class Service : IService
           true,
           CancellationToken.None);
 
+        Console.WriteLine("Server going to sleep...");
         Thread.Sleep(2000);
 
         WebSocketReceiveResult result = await socket.ReceiveAsync(new(buffer), CancellationToken.None);
